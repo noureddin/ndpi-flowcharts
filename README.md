@@ -4,6 +4,6 @@ These are (unofficial) flowcharts for [nDPI](https://github.com/ntop/nDPI) libra
 
 They are made to be a slide-show, so most functions are split into several diagrams, each is a screen-full or less.
 
-View them at: [noureddin.github.io/ndpi-flowcharts](https://noureddin.github.io/ndpi-flowcharts)
+View them at: [noureddin.github.io/ndpi-flowcharts](https://noureddin.github.io/ndpi-flowcharts) (For the best experience, use the fullscreen mode.)
 
 Made using [Dia](https://wiki.gnome.org/Apps/Dia).
