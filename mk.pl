@@ -107,9 +107,9 @@ my $demo = 'noureddin.github.io/ndpi-flowcharts';
 my $orig = 'github.com/ntop/nDPI';
 print {$indexfh} qq[
     </ul><hr>
-    <p>Online Repo: <a href="https://www.$repo">$repo</a></p>
+    <p>Online Repo: <a href="https://$repo">$repo</a></p>
     <p>Online Demo: <a href="https://$demo">$demo</a></p>
-    <p>nDPI Repo: <a href="https://www.$orig">$orig</a></p>
+    <p>nDPI Repo: <a href="https://$orig">$orig</a></p>
 ];
 
 close $indexfh;

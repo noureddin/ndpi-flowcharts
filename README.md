@@ -1,6 +1,6 @@
 # nDPI Flowcharts (Unofficial)
 
-These are (unofficial) flowcharts for [nDPI](https://www.github.com/ntop/nDPI) library.
+These are (unofficial) flowcharts for [nDPI](https://github.com/ntop/nDPI) library.
 
 They are made to be a slide-show, so most functions are split into several diagrams, each is a screen-full or less.
 
