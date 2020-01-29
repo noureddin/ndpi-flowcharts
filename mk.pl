@@ -111,7 +111,7 @@ my $orig = 'github.com/ntop/nDPI';
 print {$indexfh} qq[
     </ul><hr>
     <p>Online Repo: <a href="https://$repo">$repo</a></p>
-    <p>Online Demo: <a href="https://$demo">$demo</a></p>
+    <p>Online Demo: <a href="https://$demo/index.html">$demo</a></p>
     <p>nDPI Repo: <a href="https://$orig">$orig</a></p>
 ];
 
