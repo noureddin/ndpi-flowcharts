@@ -24,7 +24,7 @@ while (my $diafile = readdir($diadir)) {
 
     my $title = $svgfile=~s|-|/|r =~ s/[.].*//r;
 
-    $chartedfns .= qq{ <li><p><a href="$barehtmlfile">$title</a></p></li> }
+    $chartedfns .= qq{<li><p><a href="$barehtmlfile">$title</a></p></li>\n}
         if ($title !~ m|/|);
 
     # next unless $htmlfile is more recent than $diafile; ie, already converted.
@@ -62,6 +62,9 @@ while (my $diafile = readdir($diadir)) {
                         position: relative;
                         top: ${topoffset}cm;
                     }
+                    a { outline: none; }
+                    a:hover  :not(text) { fill: rgb(204, 204, 255); }
+                    a:active :not(text) { fill: rgb(150, 150, 255); }
                 </style>
             </head>
             <body>
@@ -96,14 +99,13 @@ print {$indexfh} qq[
     <h1>nDPI Flowcharts (Unofficial)</h1>
     <h2>Currently Charted Functions</h2>
     <ul>
-        $chartedfns
-    </ul><hr>
+$chartedfns</ul><hr>
     <h2>Not-yet Charted Functions<br><span class="subheader">(That Are Linked From The Currently Charted Functions)</span></h2>
     <ul>
 ];
 
-my @missing = `bash missing.sh`;
-print {$indexfh} "<li><p>$_</p></li>" for @missing;
+my @missing = split "\n", `bash missing.sh`;
+print {$indexfh} "<li><p>$_</p></li>\n" for @missing;
 
 my $repo = 'github.com/noureddin/ndpi-flowcharts';
 my $demo = 'noureddin.github.io/ndpi-flowcharts';
