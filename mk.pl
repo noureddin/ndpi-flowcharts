@@ -45,7 +45,7 @@ while (my $diafile = readdir($diadir)) {
 
     # slurp the rest of the svg file
     $svgimg .= do { local $/ = undef; <$infile> };
-    $svgimg =~ s|font-size="[.0-9]+"|font-size="0.75"|g;
+    $svgimg =~ s|font-size="[.0-9]+"|font-size="0.7"|g;
     # $svgimg =~ s|Amiri|Times New Roman|g;
 
     close $infile;
