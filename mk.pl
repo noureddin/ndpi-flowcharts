@@ -54,8 +54,10 @@ while (my $diafile = readdir($diadir)) {
     open my $outfile, '>', $htmlfile;
 
     print {$outfile} qq{
+        <!DOCTYPE html>
         <html>
             <head>
+                <meta charset="utf-8">
                 <title>$title</title>
                 <style>
                     svg {
