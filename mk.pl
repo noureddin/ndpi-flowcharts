@@ -97,7 +97,7 @@ my $chartedfns = join "\n        ", sort map { />main</? s/<p>/$boldp/r : $_ } @
 # bolding main this way has the nice side-effect of making it the first one when sorting
 
 open my $indexfh, '>', $htmlrootdir.'index.html';
-print {$indexfh} qq[
+print {$indexfh} <<~"EOT";
   <!DOCTYPE html>
   <html>
     <head>
@@ -120,7 +120,7 @@ print {$indexfh} qq[
       </ul><hr>
       <h2>Not-yet Charted Functions<br><span class="subheader">(That Are Linked From The Currently Charted Functions)</span></h2>
       <table>
-];
+  EOT
 
 my @missing = split "\n", `bash where-is-defined.sh`;
 print {$indexfh}
