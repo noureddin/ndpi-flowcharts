@@ -100,7 +100,7 @@ while (my $htmlfile = readdir($htmldir)) {
 closedir $htmldir;
 
 my $boldp = '<p style="font-weight: bold">';
-my $chartedfns = join "\n        ", sort map { />main</? s/<p>/$boldp/r : $_ } @chartedfns;
+my $chartedfns = join "\n      ", sort map { />main</? s/<p>/$boldp/r : $_ } @chartedfns;
 # bolding main this way has the nice side-effect of making it the first one when sorting
 
 open my $indexfh, '>', $htmlrootdir.'index.html';
