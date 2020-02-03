@@ -24,7 +24,7 @@ while (my $diafile = readdir($diadir)) {
 
     my $title = $svgfile=~s|-|/|r =~ s/[.].*//r;
 
-    push @chartedfns, qq{<li><p><a href="$barehtmlfile">$title</a></p></li>\n}
+    push @chartedfns, qq{<li><p><a href="$barehtmlfile">$title</a></p></li>}
         if ($title !~ m|/|);
 
     # next unless $htmlfile is more recent than $diafile; ie, already converted.
@@ -53,29 +53,31 @@ while (my $diafile = readdir($diadir)) {
 
     open my $outfile, '>', $htmlfile;
 
-    print {$outfile} qq{
+    print {$outfile} <<~"EOT";
         <!DOCTYPE html>
         <html>
-            <head>
-                <meta charset="utf-8">
-                <title>$title</title>
-                <style>
-                    svg {
-                        position: relative;
-                        top: ${topoffset}cm;
-                    }
-                    a { outline: none; }
-                    a:hover  :not(text) { fill: rgb(204, 204, 255); }
-                    a:active :not(text) { fill: rgb(150, 150, 255); }
-                </style>
-            </head>
-            <body>
-                <div align="center">
-                    $svgimg
-                </div>
-            </body>
+          <head>
+            <meta charset="utf-8">
+            <title>$title</title>
+            <style>
+              svg {
+                position: relative;
+                top: ${topoffset}cm;
+              }
+              a { outline: none; }
+              a:hover  :not(text) { fill: rgb(204, 204, 255); }
+              a:active :not(text) { fill: rgb(150, 150, 255); }
+            </style>
+          </head>
+          <body>
+            <div align="center">
+
+        $svgimg
+
+            </div>
+          </body>
         </html>
-    };
+        EOT
 
     close $outfile;
 }
@@ -91,45 +93,51 @@ while (my $htmlfile = readdir($htmldir)) {
 closedir $htmldir;
 
 my $boldp = '<p style="font-weight: bold">';
-my $chartedfns = join '', sort map { />main</? s/<p>/$boldp/r : $_ } @chartedfns;
+my $chartedfns = join "\n        ", sort map { />main</? s/<p>/$boldp/r : $_ } @chartedfns;
 # bolding main this way has the nice side-effect of making it the first one when sorting
 
 open my $indexfh, '>', $htmlrootdir.'index.html';
 print {$indexfh} qq[
-    <title>nDPI Flowcharts (Unofficial)</title>
-    <style>
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <meta charset="utf-8">
+      <title>nDPI Flowcharts (Unofficial)</title>
+      <style>
         * { text-align: center; }
         .subheader { font-size: 75%; }
         li { list-style: none; }
         table { /* center */ margin: 0 auto; border: none; }
         td:first-child { text-align: left; }
         td.def { text-align: right; font-size: 65%; }
-    </style>
-    <h1>nDPI Flowcharts (Unofficial)</h1>
-    <h2>Currently Charted Functions</h2>
-    <ul>
-
-$chartedfns
-    </ul><hr>
-    <h2>Not-yet Charted Functions<br><span class="subheader">(That Are Linked From The Currently Charted Functions)</span></h2>
-    <table>
-
+      </style>
+    </head>
+    <body>
+      <h1>nDPI Flowcharts (Unofficial)</h1>
+      <h2>Currently Charted Functions</h2>
+      <ul>
+        $chartedfns
+      </ul><hr>
+      <h2>Not-yet Charted Functions<br><span class="subheader">(That Are Linked From The Currently Charted Functions)</span></h2>
+      <table>
 ];
 
 my @missing = split "\n", `bash where-is-defined.sh`;
 print {$indexfh}
-    qq[<tr><td>$_->[0]</td><td class="def">defined in <b>$_->[1]</b></td></tr>\n]
+    qq[        <tr><td>$_->[0]</td><td class="def">defined in <b>$_->[1]</b></td></tr>\n]
         for map { [split] } @missing;
 
 my $repo = 'github.com/noureddin/ndpi-flowcharts';
 my $demo = 'noureddin.github.io/ndpi-flowcharts';
 my $orig = 'github.com/ntop/nDPI';
-print {$indexfh} qq[
-    </table><hr>
-    <p>Online Repo: <a href="https://$repo">$repo</a></p>
-    <p>Online Demo: <a href="https://$demo">$demo</a></p>
-    <p>nDPI Repo: <a href="https://$orig">$orig</a></p>
-];
+print {$indexfh} <<"EOT";
+      </table><hr>
+      <p>Online Repo: <a href="https://$repo">$repo</a></p>
+      <p>Online Demo: <a href="https://$demo">$demo</a></p>
+      <p>nDPI   Repo: <a href="https://$orig">$orig</a></p>
+    </body>
+  </html>
+EOT
 
 close $indexfh;
 
