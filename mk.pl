@@ -45,8 +45,7 @@ while (my $diafile = readdir($diadir)) {
 
     # slurp the rest of the svg file
     $svgimg .= do { local $/ = undef; <$infile> };
-    $svgimg =~ s|font-size="[.0-9]+"|font-size="0.7"|g;
-    # $svgimg =~ s|Amiri|Times New Roman|g;
+    $svgimg =~ s|font-size="[.0-9]+"|font-size="0.75"|g;
 
     close $infile;
     unlink $svgfile;
@@ -60,6 +59,14 @@ while (my $diafile = readdir($diadir)) {
             <meta charset="utf-8">
             <title>$title</title>
             <style>
+              \@font-face {
+                /* https://www.amirifont.org/ */
+                font-family: Amiri;
+                font-style: normal;
+                font-weight: 400;
+                src: url('Amiri-Regular.woff2') format('woff2'),
+                     url('Amiri-Regular.woff') format('woff');
+              }
               svg {
                 position: relative;
                 top: ${topoffset}cm;
