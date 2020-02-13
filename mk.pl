@@ -109,7 +109,6 @@ print {$indexfh} <<~"EOT";
       <title>nDPI Flowcharts (Unofficial)</title>
       <style>
         * { text-align: center; }
-        .subheader { font-size: 75%; }
         li { list-style: none; }
         table { /* center */ margin: 0 auto; border: none; }
         td:first-child { text-align: left; }
@@ -162,16 +161,35 @@ for (split "\n", $chartedfns) {
 
 print {$indexfh} <<~"EOT";
       </table><hr>
-      <h2>Not-yet Charted Functions<br><span class="subheader">(That Are Linked From The Currently Charted Functions)</span></h2>
+      <h2>Not-yet Charted Functions</h2>
       <table>
   EOT
+
+# these functions are all that remain
+my @notyetchartedfns = qw(
+    ndpi_string_to_automa
+    ndpi_add_host_ip_subprotocol
+    ndpi_handle_rule
+    ndpi_Clear_Patricia
+    ndpi_remove_host_url_subprotocol
+    addDefaultPort
+    removeDefaultPort
+    ndpi_tdelete
+    ndpi_tsearch
+    ac_automata_add
+    ndpi_patricia_lookup
+    ndpi_load_ip_category
+    ndpi_load_hostname_category
+    ndpi_init_protocol_match
+);
 
 print {$indexfh}
     qq[      <tr><td>$_->[0]</td><td class="def">defined in <b>$_->[1]</b></td></tr>\n]
         for
             sort { $a->[1] cmp $b->[1] || $a->[0] cmp $b->[0] }
             map { [split / +\.\.\// ] }
-                split "\n", `bash where-is-defined.sh`;
+            map { `bash where-is-defined.sh $_` }
+                @notyetchartedfns;
 
 my $repo = 'github.com/noureddin/ndpi-flowcharts';
 my $demo = 'noureddin.github.io/ndpi-flowcharts';
