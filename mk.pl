@@ -167,7 +167,6 @@ print {$indexfh} <<~"EOT";
 
 # these functions are all that remain
 my @notyetchartedfns = qw(
-    ndpi_string_to_automa
     ndpi_handle_rule
     ndpi_Clear_Patricia
     removeDefaultPort
