@@ -176,7 +176,6 @@ my @notyetchartedfns = qw(
     ndpi_tsearch
     ac_automata_add
     ndpi_patricia_lookup
-    ndpi_load_ip_category
 );
 
 print {$indexfh}
