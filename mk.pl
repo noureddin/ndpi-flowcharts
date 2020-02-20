@@ -168,7 +168,6 @@ print {$indexfh} <<~"EOT";
 # these functions are all that remain
 my @notyetchartedfns = qw(
     ndpi_string_to_automa
-    ndpi_add_host_ip_subprotocol
     ndpi_handle_rule
     ndpi_Clear_Patricia
     ndpi_remove_host_url_subprotocol
