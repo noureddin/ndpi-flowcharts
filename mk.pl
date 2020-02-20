@@ -169,7 +169,6 @@ print {$indexfh} <<~"EOT";
 my @notyetchartedfns = qw(
     ndpi_handle_rule
     ndpi_Clear_Patricia
-    removeDefaultPort
     ndpi_tdelete
     ndpi_tsearch
     ac_automata_add
