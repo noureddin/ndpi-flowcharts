@@ -172,7 +172,6 @@ my @notyetchartedfns = qw(
     ndpi_handle_rule
     ndpi_Clear_Patricia
     ndpi_remove_host_url_subprotocol
-    addDefaultPort
     removeDefaultPort
     ndpi_tdelete
     ndpi_tsearch
