@@ -178,7 +178,6 @@ my @notyetchartedfns = qw(
     ndpi_patricia_lookup
     ndpi_load_ip_category
     ndpi_load_hostname_category
-    ndpi_init_protocol_match
 );
 
 print {$indexfh}
